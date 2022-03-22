@@ -46,6 +46,19 @@ body{
 	padding: 8px 10px;
 	text-align: center;
 	border-bottom: 2px solid #222;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.taskBox i{
+	margin-left: 20px;
+	-webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-weight: 900;
 }
 
 .modal{

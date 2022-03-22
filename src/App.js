@@ -17,8 +17,45 @@ function App() {
 		setModal(!modal);
 	}
 
+	const checkTask = (id) => {
+		let newTask = tasks.filter((val) => {
+			if(val.id === id){
+				val.checked = true;
+			}
+
+			return val;
+		});
+
+		setTasks(newTask);
+	}
+
+	const uncheckTask = (id) => {
+		let newTask = tasks.filter((val) => {
+			if(val.id === id){
+				val.checked = false;
+			}
+
+			return val;
+		});
+
+		setTasks(newTask);
+	}
+
 	const saveTask = () => {
-		alert("Task saved");
+		var task = document.getElementById("taskContent");
+
+		setTasks([
+			...tasks,
+			{
+				id: new Date().getTime(),
+				task: task.value,
+				checked: false
+			}
+
+		]);
+
+		setModal(false);
+
 	}
 
 	return (
@@ -29,7 +66,7 @@ function App() {
 					<div className="modal">
 						<div className="modalContent">
 							<h3>Add Task</h3>
-							<input type="text"/>
+							<input type="text" id="taskContent"/>
 							<button onClick={() => saveTask()}>Add</button>
 						</div>
 
@@ -46,13 +83,14 @@ function App() {
 
 				{
 					tasks.map((val) => {
-						if(val.checked){
+
+						if(!val.checked){
 							return (
-								<p>{val.task}</p>
+								<p onClick={() => { checkTask(val.id) }}>{val.task} <i>&#10006;</i></p>
 							);
 						}else{
 							return (
-								<p style={{textDecoration: 'line-through'}}>{val.task}</p>
+								<p onClick={() => { uncheckTask(val.id) }} style={{textDecoration: 'line-through'}}>{val.task} <i class="fa fa-check"></i></p>
 							);
 						}
 					})
